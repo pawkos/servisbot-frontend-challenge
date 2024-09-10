@@ -72,3 +72,12 @@ Create an application that implements the following features
 
 There are no wireframes or design considerations specified.
 You are free to apply a UI/UX that delivers an intuitive application experience for the feature set above.
+
+## Getting Started
+
+First, run the development server:
+
+```bash
+npm install
+npm run dev
+```
