@@ -45,6 +45,7 @@ export function DataTable<TData, TValue>({
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([])
     const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
     const [rowSelection, setRowSelection] = React.useState({})
+    const [globalFilter, setGlobalFilter] = React.useState("")
 
     const table = useReactTable({
         data,
@@ -57,11 +58,14 @@ export function DataTable<TData, TValue>({
         getFilteredRowModel: getFilteredRowModel(),
         onColumnVisibilityChange: setColumnVisibility,
         onRowSelectionChange: setRowSelection,
+        onGlobalFilterChange: setGlobalFilter,
+        globalFilterFn: "includesString",
         state: {
             sorting,
             columnFilters,
             columnVisibility,
             rowSelection,
+            globalFilter,
         },
     })
 
@@ -69,14 +73,12 @@ export function DataTable<TData, TValue>({
         <div className="w-full">
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter..."
-                    value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
-                    onChange={(event) =>
-                        table.getColumn("name")?.setFilterValue(event.target.value)
-                    }
-                    className="max-w-sm"
+                    placeholder="Filter across all columns..."
+                    value={globalFilter ?? ""}
+                    onChange={(event) => table.setGlobalFilter(event.target.value)}
+                    className="max-w-none"
                 />
-                <DropdownMenu>
+                {/* <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                         <Button variant="outline" className="ml-auto">
                             Columns
@@ -99,7 +101,7 @@ export function DataTable<TData, TValue>({
                                 )
                             })}
                     </DropdownMenuContent>
-                </DropdownMenu>
+                </DropdownMenu> */}
             </div>
             <div className="rounded-md border">
                 <Table>

@@ -16,11 +16,13 @@ export default function LogsTable({ botId, workerId }: LogsTableProps) {
         {
             accessorKey: 'created',
             header: 'Created',
-            cell: ({ row }) => new Date(row.original.created).toLocaleString(),
+            cell: ({ row }) => <div className="whitespace-normal break-words w-auto">{new Date(row.original.created).toLocaleString()}</div>,
         },
         {
             accessorKey: 'message',
             header: 'Message',
+            enableSorting: true,
+            cell: ({ cell }) => <div className="whitespace-normal break-words w-auto">{String(cell.getValue())}</div>
         },
     ];
 

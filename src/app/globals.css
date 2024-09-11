@@ -90,3 +90,13 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.grid > :last-child .relative.w-full.overflow-auto {
+  overflow: unset;
+  overflow-wrap: break-word;
+}
+
+.grid > :last-child .relative.w-full.overflow-auto tbody tr td:last-child {
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
